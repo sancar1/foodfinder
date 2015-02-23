@@ -101,46 +101,52 @@
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">Filters</h4>
 				      </div>
-				      <div class="modal-body">
 
-				        
-				        <div class="dropdown">
-						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-						    Food Type
-						    <span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">American</a></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Chinese</a></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Italian</a></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sushi</a></li>
-						  </ul>
+				        <div class="modal-body">
+                		<ul>
 
-						  	<div class="button-padding">
-						  	Open Now <input type="checkbox" checked data-toggle="toggle" data-size="small">
-						  	</div>
-						  	<div class="button-padding">
-						  	Delivery <input type="checkbox" checked data-toggle="toggle" data-size="small">
-						 	</div>
-						  	<div class="button-padding">
-						  	Vegetarian <input type="checkbox" checked data-toggle="toggle" data-size="small">
-						  	</div>
-						  	<div class="button-padding">
-						  	Vegan <input type="checkbox" checked data-toggle="toggle" data-size="small">
-						 	</div>
-							<div class="button-padding">
-						  	Gluten Free <input type="checkbox" checked data-toggle="toggle" data-size="small">
-						  	</div>
-						  
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
 
-						</div><!-- /dropdown -->
+						<div class="form-group">
+	                        <label for="inputType" class="col-sm-2 control-label">Food Type</label>
+	                        <div class="col-sm-10">
+	                                 <select class="form-control" id="inputType">
+	                                    <option>American</option>
+	                                    <option>Chinese</option>
+	                                    <option>Italian</option>
+	                                    <option>Sushi</option>
+	                                    <option>Cafe</option>
+	                                    </select>
+	                        </div>
+	                      </div>
 
 
+
+				       	<div class="form-group">
+                                <label for="openNow" class="col-sm-2 control-label">Open Now</label>
+                                <div class="col-sm-10">
+                                    <input type="checkbox" checked data-toggle="toggle" name="name" class="form-control" id="openNow">
+                                </div>
+                            </div>
+
+                        <div class="form-group">
+                                <label for="vegetarian" class="col-sm-2 control-label">Vegetarian</label>
+                                <div class="col-sm-10">
+                                    <input type="checkbox" checked data-toggle="toggle" name="name" class="form-control" id="vegetarian">
+                                </div>
+                            </div>
+
+						</form>
+
+						</ul>
 				      </div><!-- /modalbody -->
+				      
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				        <button type="button" class="btn btn-primary">Save changes</button>
 				      </div>
+
 				    </div>
 				  </div>
 				</div><!-- /modal -->
