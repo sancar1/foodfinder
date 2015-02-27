@@ -54,7 +54,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-          	<li><a href="#" data-toggle="modal" data-target="#myModal">Filters</a></li>
+          	<li><a href="#" data-toggle="modal" data-target="#filters">Filters</a></li>
+          	<li><a href="#" data-toggle="modal" data-target="#favorites">Favorites</a></li>
+          	<li><a href="#" data-toggle="modal" data-target="#options">Options</a></li>
             <li><a href="#">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -94,7 +96,7 @@
 			<div class="col-lg-6 col-lg-offset-3">
 				
 				
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-sm">
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -150,6 +152,123 @@
 				    </div>
 				  </div>
 				</div><!-- /modal -->
+
+
+
+				<!-- favorites -->
+				<div class="modal fade" id="favorites" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-sm">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Favorites</h4>
+				      </div>
+
+				        <div class="modal-body">
+                		<ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" >
+
+						
+
+						</form>
+
+						</ul>
+				      </div><!-- /modalbody -->
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+
+				    </div>
+				  </div>
+				</div><!-- /modal -->
+
+
+				<!--options-->
+				<div class="modal fade" id="options" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-sm">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Options</h4>
+				      </div>
+
+				        <div class="modal-body">
+                		<ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form">
+
+				       	<div class="form-group">
+                                <label for="openNow" class="col-sm-2 control-label">Location Enabled</label>
+                                <div class="col-sm-10">
+                                    <input type="checkbox" checked data-toggle="toggle" name="name" class="form-control" id="location">
+                                </div>
+                            </div>
+
+                        <div class="form-group">
+                                <label for="vegetarian" class="col-sm-2 control-label">Save Favorites</label>
+                                <div class="col-sm-10">
+                                    <input type="checkbox" checked data-toggle="toggle" name="name" class="form-control" id="favorites">
+                                </div>
+                        </div>
+
+                  		<button type="button" class="btn btn-default" data-target="#resetwarning">Reset Food Preferences</button>
+
+
+						</form>
+
+						</ul>
+				      </div><!-- /modalbody -->
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+
+				    </div>
+				  </div>
+				</div><!-- /modal -->
+
+
+
+				<!-- reset warning-->
+				<div class="modal fade" id="resetwarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-sm">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Warning!</h4>
+				      </div>
+
+				        <div class="modal-body">
+                		<ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" >
+
+						Are you sure you want to reset your food preferences? All your favorites and dislikes will be erased.
+
+						</form>
+
+						</ul>
+				      </div><!-- /modalbody -->
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">No, keep preferences</button>
+				        <button type="button" class="btn btn-primary">Yes, delete preferences</button>
+				      </div>
+
+				    </div>
+				  </div>
+				</div><!-- /modal -->
+
+
+
+
 
 			</div>
 		</div><!-- /row -->
