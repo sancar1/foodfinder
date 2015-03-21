@@ -96,18 +96,37 @@ function callback(results, status, pagination) {
 	console.log('Returning ' + results.length + ' results');
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      //console.log(place);
+      console.log(place);
 	  console.log(i + ': ' + place.name + ': ' + results.length)
 	  	  
 	  if(i==0 && count==0){
+		  var newLine1 = document.createElement('br');
+		  var newLine2 = document.createElement('br');
+		  
 		  var aDiv = document.createElement('div');
 		  aDiv.className = 'item active';
+		  
 		  var bDiv = document.createElement('span');
-		  var cPlace = document.createTextNode(place.name);
-		  bDiv.appendChild(cPlace);
+		  var name_text = document.createTextNode(place.name);
+		  bDiv.appendChild(name_text);
+		  
+		  var cDiv = document.createElement('span');
+		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5');
+		  cDiv.appendChild(rating_text);
+		  
+		  var dDiv = document.createElement('span');
+		  var price_text = document.createTextNode('Price: ' + place.price_level + '/3');
+		  dDiv.appendChild(price_text);
+
 		  aDiv.appendChild(bDiv);
+		  aDiv.appendChild(newLine1);
+		  aDiv.appendChild(cDiv);
+		  aDiv.appendChild(newLine2);
+		  aDiv.appendChild(dDiv);
+
 		  document.getElementById("inner-carousel").appendChild(aDiv);
 	  } else {
+		  /*
 		  var iDiv = document.createElement('div');
 		  iDiv.className = 'item';
 		  var kDiv = document.createElement('span');
@@ -115,6 +134,32 @@ function callback(results, status, pagination) {
 		  kDiv.appendChild(place);
 		  iDiv.appendChild(kDiv);
 		  document.getElementById("inner-carousel").appendChild(iDiv);
+		  */
+		  var newLine1 = document.createElement('br');
+		  var newLine2 = document.createElement('br');
+		  
+		  var aDiv = document.createElement('div');
+		  aDiv.className = 'item';
+		  
+		  var bDiv = document.createElement('span');
+		  var name_text = document.createTextNode(place.name);
+		  bDiv.appendChild(name_text);
+		  
+		  var cDiv = document.createElement('span');
+		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5');
+		  cDiv.appendChild(rating_text);
+		  
+		  var dDiv = document.createElement('span');
+		  var price_text = document.createTextNode('Price: ' + place.price_level + '/3');
+		  dDiv.appendChild(price_text);
+
+		  aDiv.appendChild(bDiv);
+		  aDiv.appendChild(newLine1);
+		  aDiv.appendChild(cDiv);
+		  aDiv.appendChild(newLine2);
+		  aDiv.appendChild(dDiv);
+
+		  document.getElementById("inner-carousel").appendChild(aDiv);
 	  }
     }
 	
