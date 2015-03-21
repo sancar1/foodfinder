@@ -1,5 +1,5 @@
 var placesList;
-var count = 0;
+var resultPage = 0;
 	
 function determineLocation() {
 	// check for Geolocation support
@@ -33,6 +33,9 @@ function determineLocation() {
       //   1: permission denied
       //   2: position unavailable (error response from location provider)
       //   3: timed out
+	  if(error.code == 3){
+		  alert('The request timed out. Try again later.');
+	  }
     };
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 }
@@ -49,12 +52,10 @@ function getResults(lat,lon) {
 	console.log(document.getElementById('openNow').checked);
 	
 	var currentPosition = new google.maps.LatLng(lat,lon);
-	
 	map = new google.maps.Map(document.getElementById('map'), {
       center: currentPosition,
       zoom: 15
     });
-	
 	var request = {
 		location: currentPosition,
 		radius: distance, //meters to miles conversion: input/0.00062137
@@ -63,10 +64,10 @@ function getResults(lat,lon) {
 	};
 	
 	service = new google.maps.places.PlacesService(map);
-	service.nearbySearch(request, callback);
+	service.nearbySearch(request, getResults_callback);
 }
 
-function callback(results, status, pagination) {
+function getResults_callback(results, status, pagination) {
   console.log(status);
   if (status == google.maps.places.PlacesServiceStatus.OK) {
 	/*
@@ -88,7 +89,7 @@ function callback(results, status, pagination) {
         google.maps.event.addDomListenerOnce(moreButton, 'click',
             function() {
           pagination.nextPage();
-		  count++;
+		  resultPage++;
         });
 	  
      }
@@ -99,19 +100,26 @@ function callback(results, status, pagination) {
       console.log(place);
 	  console.log(i + ': ' + place.name + ': ' + results.length)
 	  	  
-	  if(i==0 && count==0){
+	  if(i==0 && resultPage==0){
 		  var newLine1 = document.createElement('br');
 		  var newLine2 = document.createElement('br');
 		  
 		  var aDiv = document.createElement('div');
 		  aDiv.className = 'item active';
+		  //aDiv.id = place.place_id;
+		  
+		  //var link = document.createElement('a');
+		  //link.setAttribute('onclick', 'getPlaceDetails("'+place.place_id+'")');
 		  
 		  var bDiv = document.createElement('span');
 		  var name_text = document.createTextNode(place.name);
+		  bDiv.setAttribute('onclick', 'getPlaceDetails("'+place.place_id+'")');
+		  bDiv.style.cursor = 'pointer';
 		  bDiv.appendChild(name_text);
 		  
 		  var cDiv = document.createElement('span');
-		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5');
+		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5'
+	  		+ ' Rounded: ' + (place.rating * 2).toFixed() / 2 );
 		  cDiv.appendChild(rating_text);
 		  
 		  var dDiv = document.createElement('span');
@@ -140,13 +148,17 @@ function callback(results, status, pagination) {
 		  
 		  var aDiv = document.createElement('div');
 		  aDiv.className = 'item';
+		  //aDiv.id = place.place_id;
 		  
 		  var bDiv = document.createElement('span');
 		  var name_text = document.createTextNode(place.name);
+		  bDiv.setAttribute('onclick', 'getPlaceDetails("'+place.place_id+'")');
+		  bDiv.style.cursor = 'pointer';
 		  bDiv.appendChild(name_text);
 		  
 		  var cDiv = document.createElement('span');
-		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5');
+		  var rating_text = document.createTextNode('Rating: ' + place.rating + '/5'
+	  		+ ' Rounded: ' + (place.rating * 2).toFixed() / 2 );
 		  cDiv.appendChild(rating_text);
 		  
 		  var dDiv = document.createElement('span');
@@ -160,26 +172,23 @@ function callback(results, status, pagination) {
 		  aDiv.appendChild(dDiv);
 
 		  document.getElementById("inner-carousel").appendChild(aDiv);
-	  }
-    }
-	
-  }
-}
-
-function placeDetails(){
-	console.log(arguments.length);
+	  } //else
+    } //for
+  } //if-status-OK
 }
 
 function getPlaceDetails(place_id) {
+	//console.log('getPlaceDetails() called with ' + place_id);
 	var request = {
-  	  placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+  	  placeId: place_id
 	};
 
 	service = new google.maps.places.PlacesService(map);
-	service.getDetails(request, placeDetail_callback);
+	service.getDetails(request, getPlaceDetails_callback);
 }
 
-function placeDetail_callback(place, status) {
+function getPlaceDetails_callback(place, status) {
+	//console.log('callaback girlllll');
   if (status == google.maps.places.PlacesServiceStatus.OK) {
 	  console.log(place);
   }
