@@ -157,3 +157,7 @@ i {
 .button-padding{
     padding-top: 10px;
 }
+
+.carousel-width{
+    width: 100%;
+}
