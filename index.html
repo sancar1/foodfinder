@@ -20,6 +20,9 @@
 	<link href="assets/css/bootstrap-multiselect.css" rel="stylesheet"  type="text/css"/>
 	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,900|Maven+Pro:400,500,700,900|Pacifico" rel="stylesheet" type="text/css">
 
+	<!--Multiselect Test -->
+  	<link rel="stylesheet" href="assets/silviomoreto-bootstrap-select-83d5a1b/dist/css/bootstrap-select.css">
+
 	<!-- bootstrap toggle -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     
@@ -110,26 +113,20 @@
                 		<ul>
 
                         <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <form class="form-horizontal" role="form">
 							<div class="form-group">
 
-	                        	<select id="multiselect" multiple="multiple">
-								    <option value="cheese">Cheese</option>
-								    <option value="tomatoes">Tomatoes</option>
-								    <option value="mozzarella">Mozzarella</option>
-								    <option value="mushrooms">Mushrooms</option>
-								    <option value="pepperoni">Pepperoni</option>
-								    <option value="onions">Onions</option>
-								</select>
+	                      <!--Multiselect Test -->
 
-								<!--
-	                        	<script type="text/javascript">
-								    $(document).ready(function() {
-								        $('#multiselect').multiselect();
-								    });
-								</script>
-								-->
-											
+								      <label for="foodType" class="col-sm-2 control-label">Food Type</label>
+
+								      <div class="col-sm-8">
+								        <select id="foodType" class="selectpicker show-menu-arrow form-control" multiple data-selected-text-format="count">
+								          <option>American</option>
+								          <option>Chinese</option>
+								          <option>Italian</option>
+								        </select>
+								      </div>
 	                      </div>
 
 				       	<div class="form-group">
@@ -295,7 +292,8 @@
     <script src="assets/js/bootstrap-modal-carousel.js"/></script/>
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 	<!-- multi-select-->
-    <script src="assets/js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <script src="assets/silviomoreto-bootstrap-select-83d5a1b/dist/js/bootstrap-select.js"></script>
+    <script> jQuery('.selectpicker').selectpicker($); </script>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>	
     <script src="dataPull.js" type="text/javascript"></script>
   </body>
