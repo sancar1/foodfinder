@@ -165,3 +165,52 @@ i {
 .carousel-inner { text-align: center; }
 .carousel .item > img { display: inline-block; }
 .icon-invisible { visibility: hidden; }
+
+.carousel-control.left.overlay{
+    background-image: none;
+}
+
+.carousel-control.right.overlay{
+    background-image: none;
+}
+
+.carousel-background{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.top-space{
+    margin-top: 80px;
+}
+
+.red-color{
+    color: #F52929;
+}
+
+.green-color{
+    color:rgb(83, 201, 83);
+}
+
+.big-text{
+    font-size: 3em;
+}
+
+.favorites-ul{
+    list-style-type:none;
+    width: 90%;
+}
+
+#picture{
+    width: auto;
+    height: auto;
+    max-height: 5em;
+}
+
+.name{
+    font-size: 50px;
+}
+
+.reviews{
+    font-size: 40px;
+}

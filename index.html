@@ -11,17 +11,15 @@
     <title>föda</title>
 
     <!-- Includes -->
-	
+	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"/>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/mobile.css" rel="stylesheet" media="screen and (max-device-width: 480px)" >
 	
 	<link href="assets/css/bootstrap-modal-carousel.css" rel="stylesheet">
 	<link href="assets/css/bootstrap-multiselect.css" rel="stylesheet"  type="text/css"/>
 	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,900|Maven+Pro:400,500,700,900|Pacifico" rel="stylesheet" type="text/css">
-
-	<!--Multiselect Test -->
-  	<link rel="stylesheet" href="assets/silviomoreto-bootstrap-select-83d5a1b/dist/css/bootstrap-select.css">
 
 	<!-- bootstrap toggle -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -64,35 +62,54 @@
 
 				<!-- Carousel  -->
 
-			<!-- <button type="button" class="btn" data-toggle="modal" data-target="#myModal" data-local="#myCarousel">Demo</button> -->
-				<div id="myCarousel" class="carousel slide carousel-fit carousel-background top-space" data-ride="carousel" data-interval="false">
+			<!--<button type="button" class="btn" data-toggle="modal" data-target="#myModal" >Demo</button>-->
+				<div id="myCarousel" class="carousel slide carousel-fit carousel-background top-space" data-ride="carousel" data-interval="false" style="">
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" id="inner-carousel">
+				  <div class="carousel-inner big-text" id="inner-carousel">
 					  <!-- Results are appended here -->
 				  </div>
 
 				  <!-- Controls -->
-				  <a class="left carousel-control overlay" href="#myCarousel" data-slide="prev">
-				    <i><span class="fa fa-times-circle fa-2x top-space"></span></i>
+				  <a class="left carousel-control overlay" href="#myCarousel" data-slide="next" id="left-carousel">
+				    <i class = "red-color"><span class="fa fa-times-circle fa-4x top-space"></span></i>
 				  </a>
 				  <a class="right carousel-control overlay" href="#myCarousel" data-slide="next" id="right-carousel">
-				    <i><span class="fa fa-gratipay fa-2x top-space"></span></i>
+				    <i class = "green-color"><span class="fa fa-gratipay fa-4x top-space"></span></i>
 				  </a>
 				</div>
 
-				<div class="modal fade modal-fullscreen force-fullscreen" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<!-- removed force-fullscreen since it was moving the body text -->
+				<!--modal-fullscreen--> 
+				<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title">Modal title</h4>
+				        <h4 class="modal-title">Information</h4>
 				      </div>
 				      <div class="modal-body">
-				        <p>One fine body…</p>
+					
+					<h2 id="infoName" class="name"> Name </h2>
+					<h2 id="infoPrice"> Price_level </h2>
+					<h2 id="infoRatings"> Rating </h2>
+					<h2 id="infoMap"> Map </h2>
+					<h2 id="infoOpen"> Open Now? </h2>
+					<i class="fa fa-moon-o fa-2x"></i>
+					<i class="fa fa-sun-o fa-2x"></i>
+					<h2 id="infoAddress"> Address </h2>
+					<button type="button" class="btn btn-default" id="infoDirections">Directions</button>
+					<h2 id="infoPhone"> Phone number </h2> 
+					<h2 id="infoHours"> Hours of Operation </h2>
+					<h2 id="infoWebsite"> Website </h2>
+					<h2 id="infoReviews" class="reviews"> User Reviews </h2>
+					<h2 id="infoDelivery"> Delivery? </h2>
+					<i class="fa fa-car fa-2x"></i>
+					<h2 id="infoTakeout"> Takeout? </h2>
+
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+				        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 				      </div>
 				    </div><!-- /.modal-content -->
 				  </div><!-- /.modal-dialog -->
@@ -113,71 +130,26 @@
                 		<ul>
 
                         <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
 							<div class="form-group">
 
-	                      <!--Multiselect Test -->
+	                        	<select id="multiselect" multiple="multiple">
+								    <option value="cheese">Cheese</option>
+								    <option value="tomatoes">Tomatoes</option>
+								    <option value="mozzarella">Mozzarella</option>
+								    <option value="mushrooms">Mushrooms</option>
+								    <option value="pepperoni">Pepperoni</option>
+								    <option value="onions">Onions</option>
+								</select>
 
-								      <label for="foodType" class="col-sm-2 control-label">Food Type</label>
-
-								      <div class="col-sm-8">
-								        <select id="foodType" class="selectpicker show-menu-arrow form-control" multiple data-selected-text-format="count">
-								          <option>American</option>
-								          <option>Asian</option>
-								          <option>Bagels</option>
-								          <option>Bakery</option>
-								          <option>Bar</option>
-								          <option>BBQ</option>
-								          <option>Breakfast</option>
-								          <option>Buffet</option>
-								          <option>Burgers</option>
-								          <option>Cafe</option>
-								          <option>Cajun/Creole</option>
-								          <option>Caribbean</option>
-								          <option>Chicken</option>
-								          <option>Chinese</option>
-								          <option>Coffee</option>
-								          <option>Cuban</option>
-								          <option>Delicatessen</option>
-								          <option>Dessert</option>
-								          <option>Diner</option>
-								          <option>Donuts</option>
-								          <option>Fast Food</option>
-								          <option>Filipino</option>
-								          <option>Frozen Yogurt</option>
-								          <option>Greek</option>
-								          <option>Hawaiian</option>
-								          <option>Hot Dogs/ Sausages</option>
-								          <option>Ice cream / Gelato</option>
-								          <option>Indian</option>
-								          <option>Italian</option>
-								          <option>Japanese</option>
-								          <option>Korean</option>
-								          <option>Latin American</option>
-								          <option>Mediterranean</option>
-								          <option>Mexican</option>
-								          <option>Middle Eastern</option>
-								          <option>Organic</option>
-								          <option>Pho</option>
-								          <option>Pizza</option>
-								          <option>Pub</option>
-								          <option>Salad</option>
-								          <option>Sandwich / Sub</option>
-								          <option>Seafood</option>
-								          <option>Smoothies</option>
-								          <option>Soup</option>
-								          <option>Southern</option>
-								          <option>Spanish</option>
-								          <option>Steakhouse</option>
-								          <option>Sushi</option>
-								          <option>Tacos</option>
-								          <option>Tapas</option>
-								          <option>Tea</option>
-								          <option>Thai</option>
-								          <option>Vegetarian</option>
-								          <option>Vietnamese</option>
-								        </select>
-								      </div>
+								<!--
+	                        	<script type="text/javascript">
+								    $(document).ready(function() {
+								        $('#multiselect').multiselect();
+								    });
+								</script>
+								-->
+											
 	                      </div>
 
 				       	<div class="form-group">
@@ -220,7 +192,17 @@
 				      </div>
 
 				        <div class="modal-body">
-                		<ul>
+                		<ul class = "favorites-ul">
+                			<li>Testing<br>
+                				Price<br>
+                				Picture
+                				<hr>
+                			</li>
+                			<li>Test<hr>
+                			</li>
+                			<li>teeest
+                			</li>
+                		</ul>
 
                         <!-- Request Information is here -->
                         <form class="form-horizontal" role="form" >
@@ -234,7 +216,6 @@
 				      
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
 				      </div>
 
 				    </div>
@@ -343,9 +324,9 @@
     <script src="assets/js/bootstrap-modal-carousel.js"/></script/>
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 	<!-- multi-select-->
-    <script src="assets/silviomoreto-bootstrap-select-83d5a1b/dist/js/bootstrap-select.js"></script>
-    <script> jQuery('.selectpicker').selectpicker($); </script>
+    <script src="assets/js/bootstrap-multiselect.js" type="text/javascript"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>	
     <script src="dataPull.js" type="text/javascript"></script>
+	<script src="bower_components/underscore/underscore.js" type="text/javascript"></script>
   </body>
 </html>

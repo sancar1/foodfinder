@@ -1,0 +1,25 @@
+.big-text{
+    font-size: 1em;
+}
+
+.fa-4x{
+	font-size: 2em;
+}
+
+.top-space{
+    margin-top: 40px;
+}
+
+#picture{
+    width: auto;
+    height: auto;
+    max-height: 5em;
+}
+
+#infoWebsite{
+	overflow: auto;
+}
+
+h2{
+	font-size: 18px;
+}
