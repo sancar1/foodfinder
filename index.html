@@ -89,22 +89,42 @@
 				      </div>
 				      <div class="modal-body">
 					
-					<h2 id="infoName" class="name"> Name </h2>
-					<h2 id="infoPrice"> Price_level </h2>
-					<h2 id="infoRatings"> Rating </h2>
+					<center>
+					<h2 id="infoName" class="name no-margins" > Name </h2>
+					<h2 id="infoPrice" class="no-margins"> Price_level </h2>
+					<h2 id="infoRatings" class="no-margins"> Rating </h2>
+					</center>
 					<h2 id="infoMap"> Map </h2>
-					<h2 id="infoOpen"> Open Now? </h2>
-					<i class="fa fa-moon-o fa-2x"></i>
-					<i class="fa fa-sun-o fa-2x"></i>
+					<h2 id="infoOpen"> Open Now? </h2>		
 					<h2 id="infoAddress"> Address </h2>
 					<button type="button" class="btn btn-default" id="infoDirections">Directions</button>
 					<h2 id="infoPhone"> Phone number </h2> 
 					<h2 id="infoHours"> Hours of Operation </h2>
 					<h2 id="infoWebsite"> Website </h2>
-					<h2 id="infoReviews" class="reviews"> User Reviews </h2>
+
+					<h2> Reviews: </h2>
+
+					<!-- Reviews Carousel-->
+					<div id="reviewsCarousel" class="carousel slide carousel-fit carousel-background" data-ride="carousel" data-interval="false" style="">
+					  <!-- Wrapper for slides -->
+					  <div class="carousel-inner" id="inner-review-carousel">
+						  <!-- Results are appended here -->
+					  </div>
+
+					  <!-- Controls -->
+					  <a class="left carousel-control overlay" href="#reviewsCarousel" data-slide="previous" id="left-carousel">
+					    <i class><span class="fa fa-arrow-left"></span></i>
+					  </a>
+					  <a class="right carousel-control overlay" href="#reviewsCarousel" data-slide="next" id="right-carousel">
+					    <i class><span class="fa fa-arrow-right"></span></i>
+					  </a>
+					</div>
+
 					<h2 id="infoDelivery"> Delivery? </h2>
-					<i class="fa fa-car fa-2x"></i>
+					<!--
 					<h2 id="infoTakeout"> Takeout? </h2>
+					-->
+					<h2 id="infoPhotos"> <div id="insidePhotos"></div> Photos </h2>
 
 				      </div>
 				      <div class="modal-footer">
@@ -192,7 +212,9 @@
 				      </div>
 
 				        <div class="modal-body">
-                		<ul class = "favorites-ul">
+                		<ul class = "favorites-ul" id="favorites-list">
+							
+							<!--
                 			<li>Testing<br>
                 				Price<br>
                 				Picture
@@ -203,6 +225,7 @@
                 			<li>teeest
                 			</li>
                 		</ul>
+						-->
 
                         <!-- Request Information is here -->
                         <form class="form-horizontal" role="form" >

@@ -2,10 +2,10 @@ var placesList;
 var resultPage = 0;
 var currentPosition;
 var paginationPage = [];
+
 var distanceArray = [];
 	
 function determineLocation() {
-	// check for Geolocation support
 	if (navigator.geolocation) {
 	  console.log('Geolocation is supported!');
 	}
@@ -85,10 +85,11 @@ function getResults_callback(results, status, pagination) {
         moreButton.disabled = true;
         pagination.nextPage();
       });
-	  
     }	
 	*/
-	  
+
+	document.getElementById('right-carousel').addEventListener('click', addFavorite);
+
 	//console.log(pagination);
   	if (pagination.hasNextPage) {
         var moreButtonRight = document.getElementById('right-carousel');
@@ -97,21 +98,18 @@ function getResults_callback(results, status, pagination) {
           pagination.nextPage();
 		  resultPage++;
         });
-		
         var moreButtonLeft = document.getElementById('left-carousel');
         google.maps.event.addDomListenerOnce(moreButtonLeft, 'click',
             function() {
           pagination.nextPage();
 		  resultPage++;
         });
-	  
     }
 	 
 	 
   	//console.log(paginationPage.indexOf(pagination.H));
   	//paginationPage.push(pagination.H);
   	//console.log(paginationPage.indexOf(pagination.H));
-	
 	if(paginationPage.indexOf(pagination.H) == -1 || paginationPage.indexOf(pagination.H) == 0){  // ?????? why 0
 		//console.log('contains pagination.h: ' + _.contains(paginationPage, pagination.H));
 		
@@ -123,6 +121,21 @@ function getResults_callback(results, status, pagination) {
 		  var place = results[i];
 		  console.log(place);
 		  //console.log(i + ': ' + place.name + ': ' + results.length)
+		  
+		  
+		  /*
+		  function addFavorite(){
+			  var favorites = document.getElementById('favorites-list');
+			  
+			  var fave = document.createElement('li');
+			  var restaurant = document.getElementById('myCarousel').getElementsByClassName('item active');
+			  //console.log(restaurant);
+			  var rName = restaurant[0].childNodes[0].innerHTML;
+			  console.log(rName);
+			  fave.innerHTML = rName;
+			  favorites.appendChild(fave);
+		  };
+		  */
 		  
 		  //getDistance(place.vicinity);
 		
@@ -139,6 +152,7 @@ function getResults_callback(results, status, pagination) {
 		  
 		  var bDiv = document.createElement('span');
 		  var name_text = document.createTextNode(place.name);
+		  bDiv.id = place.place_id;
 		  bDiv.setAttribute('onclick', 'getPlaceDetails("'+place.place_id+'")');
 		  bDiv.style.cursor = 'pointer';
 		  bDiv.setAttribute('data-target', '#myModal');
@@ -146,9 +160,6 @@ function getResults_callback(results, status, pagination) {
 		  bDiv.appendChild(name_text);
 		  
 		  var cDiv = document.createElement('span');
-		  //var rating_text = document.createTextNode('Rating: ' + place.rating + '/5'
-		  //	+ ' Rounded: ' + (place.rating * 2).toFixed() / 2 );
-		  //cDiv.appendChild(rating_text);
 		  switch((place.rating * 2).toFixed() / 2) {
 			  case 0:
 				  cDiv.innerHTML = '<i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>';
@@ -189,8 +200,6 @@ function getResults_callback(results, status, pagination) {
 		  } //switch
 		  
 		  var dDiv = document.createElement('span');
-		  //var price_text = document.createTextNode('Price: ' + place.price_level + '/3');
-		  //dDiv.appendChild(price_text);
 		  switch(place.price_level) {
 			  case 1:
 				  dDiv.innerHTML = '<i class="fa fa-usd"></i>';
@@ -210,6 +219,10 @@ function getResults_callback(results, status, pagination) {
 		  sDiv = document.createElement('div');
 		  if(photos){
 			sDiv.innerHTML = '<img src="' + photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500}) + '" id="picture"></img>';
+			sDiv.setAttribute('onclick', 'getPlaceDetails("'+place.place_id+'")');
+			sDiv.style.cursor = 'pointer';
+			sDiv.setAttribute('data-target', '#myModal');
+			sDiv.setAttribute('data-toggle', 'modal');
 		  }
 		  
 		  aDiv.appendChild(bDiv); //name
@@ -230,8 +243,6 @@ function getResults_callback(results, status, pagination) {
 
 		  document.getElementById("inner-carousel").appendChild(aDiv);
 		  
-		  
-		  
 		  //var infoPrice = document.getElementById('infoPrice');
 		  //var infoRatings = document.getElementById('infoRatings');
 		  var infoHours = document.getElementById('infoHours');
@@ -247,8 +258,25 @@ function getResults_callback(results, status, pagination) {
   } //if-status-OK
 }
 
+function addFavorite(){
+  var favorites = document.getElementById('favorites-list');
+  
+  var fave = document.createElement('li');
+  var restaurant = document.getElementById('myCarousel').getElementsByClassName('item active');
+  //console.log(restaurant);
+  var rName = restaurant[0].childNodes[0].innerHTML;
+  var rId = restaurant[0].childNodes[0].id;
+  console.log(rName + ' ' + rId);
+  fave.innerHTML = rName;
+  fave.id = rId;
+  fave.setAttribute('onclick', 'getPlaceDetails("'+rId+'")');
+  fave.style.cursor = 'pointer';
+  fave.setAttribute('data-target', '#myModal');
+  fave.setAttribute('data-toggle', 'modal');
+  favorites.appendChild(fave);
+};
+
 function getPlaceDetails(place_id) {
-	//console.log('getPlaceDetails() called with ' + place_id);
 	var request = {
   	  placeId: place_id
 	};
@@ -258,7 +286,6 @@ function getPlaceDetails(place_id) {
 }
 
 function getPlaceDetails_callback(place, status) {
-	//console.log('callaback girlllll');
   if (status == google.maps.places.PlacesServiceStatus.OK) {
 	  console.log(place);
 	  var infoName = document.getElementById('infoName');
@@ -325,8 +352,42 @@ function getPlaceDetails_callback(place, status) {
 	  var infoOpen = document.getElementById('infoOpen');
 	  if(place.opening_hours != undefined){
 		  infoOpen.innerHTML = 'Open now: ' + place.opening_hours.open_now;
+		  if(place.opening_hours.open_now == true){
+		  		//infoOpen.innerHTML = '<i class="fa fa-sun-o"></i>' + 'Open Now';
+				infoOpen.innerHTML = '<i class="fa fa-sun-o"></i>' + '<a data-toggle="collapse" href="#infoHours" aria-expanded="false" aria-controls="infoHours">Open Now</a>';
+		  }
+		  else{
+		  		//infoOpen.innerHTML = '<i class="fa fa-moon-o"></i>' + 'Closed Now';
+				infoOpen.innerHTML = '<i class="fa fa-moon-o"></i>' + '<a data-toggle="collapse" href="#infoHours" aria-expanded="false" aria-controls="infoHours">Closed Now</a>';
+		  }
 	  } else { infoOpen.innerHTML = ''; }
 	  
+	  
+	  var carouselReviews = document.getElementById('inner-review-carousel');
+	  if(place.reviews != undefined){  
+		  for(var i = 0; i < place.reviews.length; i++) {
+			  if(i==0){
+				  var aDiv = document.createElement('div');
+				  aDiv.className = 'item active';
+			  } else {
+				  aDiv = document.createElement('div');
+				  aDiv.className = 'item';  
+			  } //else
+			  var bDiv = document.createElement('span');
+			  bDiv.innerHTML = '( ' + (i+1) + '/' + place.reviews.length + ' ) <br>' + place.reviews[i].text;
+			  aDiv.appendChild(bDiv);
+			  carouselReviews.appendChild(aDiv);
+		  } //for
+	  } else if(place.reviews == undefined){
+		  var aDiv = document.createElement('div');
+		  aDiv.className = 'item active';
+		  var bDiv = document.createElement('span');
+		  bDiv.innerHTML = 'No reviews<br><br> ';
+		  aDiv.appendChild(bDiv);
+		  carouselReviews.appendChild(aDiv);
+	  }
+	 
+	  /*
 	  var infoReviews = document.getElementById('infoReviews');
 	  infoReviews.innerHTML = '';
 	  if(place.reviews != undefined){
@@ -334,6 +395,7 @@ function getPlaceDetails_callback(place, status) {
 		  	  infoReviews.innerHTML += place.reviews[i].text + '<br><br>';
 		  }
 	  } else { infoReviews.innerHTML = ''; }
+	  */
 	  
 	  var infoDelivery = document.getElementById('infoDelivery');
 	  var isDelivery = false;
@@ -342,8 +404,14 @@ function getPlaceDetails_callback(place, status) {
 			  isDelivery = true;
 	  	  }
 	  }
-	  infoDelivery.innerHTML = 'Delivery: ' + isDelivery;
+	  if(isDelivery == true){
+	  		infoDelivery.innerHTML = '<i class="fa fa-car"></i>' + 'Delivery Available';
+	  }
+	  else{
+	  		infoDelivery.innerHTML = 'No Delivery Available';
+	  }
 	  
+	  /*
 	  var infoTakeout = document.getElementById('infoTakeout');
 	  var isTakeout = false;
 	  for (var i = 0; i < place.types.length; i++) {
@@ -352,6 +420,7 @@ function getPlaceDetails_callback(place, status) {
 	  	  }
 	  }
 	  infoTakeout.innerHTML = 'Takeout: ' + isTakeout;
+	  */
 	  
 	  var infoAddress = document.getElementById('infoAddress');
 	  infoAddress.innerHTML = place.formatted_address;
@@ -363,10 +432,12 @@ function getPlaceDetails_callback(place, status) {
 	  
 	  var infoWebsite = document.getElementById('infoWebsite');
 	  if(place.website != undefined) {
-	  	infoWebsite.innerHTML = place.website;
+	  	infoWebsite.innerHTML = 'Menu: <a href="' + place.website + '">Visit Website</a>';
+	  
 	  } else { infoWebsite.innerHTML = ''; }
 	  
 	  var infoHours = document.getElementById('infoHours');
+	  infoHours.className = "collapse";
 	  if(place.opening_hours != undefined){
 	  	infoHours.innerHTML = place.opening_hours.weekday_text[0] + '<br>' + 
 	  		place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] +
@@ -374,6 +445,35 @@ function getPlaceDetails_callback(place, status) {
 	    	'<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6] + 
 		  '<br>';
 	  } else { infoHours.innerHTML = ''; }
+	  
+	  
+	  var elem = document.getElementById('insidePhotos');
+	  elem.parentNode.removeChild(elem);
+	  
+	  var insidePhotos = document.createElement('div');
+	  insidePhotos.id = 'insidePhotos';
+	  
+	  var infoPhotos = document.getElementById('infoPhotos');
+	  infoPhotos.appendChild(insidePhotos);
+	  
+	  var photos = place.photos;
+	  console.log(place.photos);
+	  console.log(place.photos.length);
+	  if(place.photos != undefined){
+	  	for(var i=0; i<place.photos.length ;i++){
+			var img = document.createElement('div');
+			img.innerHTML = '<img src="' + photos[i].getUrl({'maxWidth': 500, 'maxHeight': 500}) + '" id="addtnImgs"></img>';
+			
+			/*
+		  	var img = document.createElement('img');
+			img.src = photos[i].getURL({'maxWidth': 50, 'maxHeight': 50});
+			img.id = 'additionalImgs';
+			*/
+			
+			insidePhotos.appendChild(img);
+	  	}
+	   } else { console.log('No photos'); }
+	  
   }
 }
 
